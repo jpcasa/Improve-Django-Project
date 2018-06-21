@@ -1,0 +1,49 @@
+<!doctype html>
+{% load static from staticfiles %}
+<html>
+    <head>
+        <title>Soda Fountain</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+        <style media="screen">
+            .menu-form select {
+                height: 220px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-header">
+            {% if user.is_authenticated %}
+                <a href="{% url 'menu:menu_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            {% endif %}
+            <h1><a href="/">Soda Fountain</a></h1>
+        </div>
+        <div class="content container">
+            <div class="row">
+              {% if messages %}
+                  <div class="small-6 small-centered columns">
+                      {% for message in messages %}
+                          <div data-alert class="callout {{ message.tags }}">
+                              {{ message }}
+                              <a href="#" class="close">&times;</a>
+                          </div>
+                      {% endfor %}
+                  </div>
+              {% endif %}
+                <div class="col-md-8">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $( function() {
+                $( ".datepicker" ).datepicker(
+                  {dateFormat: 'mm/dd/yy'}
+                );
+            });
+        </script>
+    </body>
+</html>
